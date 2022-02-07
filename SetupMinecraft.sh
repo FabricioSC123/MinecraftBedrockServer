@@ -246,9 +246,6 @@ if [ -d "$ServerName" ]; then
   cd $ServerName
   echo "Server directory is: $DirName/minecraftbe/$ServerName"
 
-  # Update Minecraft server scripts
-  Update_Scripts
-
   # Service configuration
   Update_Service
 
@@ -277,9 +274,6 @@ mkdir backups
 mkdir logs
 
 Check_Architecture
-
-# Update Minecraft server binary
-Update_Server
 
 # Update Minecraft server scripts
 Update_Scripts
