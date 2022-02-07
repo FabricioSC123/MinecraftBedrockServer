@@ -41,52 +41,6 @@ function read_with_prompt {
   done
 }
 
-Update_Scripts() {
-  # Remove existing scripts
-  rm start.sh stop.sh restart.sh fixpermissions.sh
-
-  # Download start.sh from repository
-  echo "Grabbing start.sh from repository..."
-  curl -H "Accept-Encoding: identity" -L -o start.sh https://raw.githubusercontent.com/TheRemote/MinecraftBedrockServer/master/start.sh
-  chmod +x start.sh
-  sed -i "s:dirname:$DirName:g" start.sh
-  sed -i "s:servername:$ServerName:g" start.sh
-  sed -i "s:userxname:$UserName:g" start.sh
-  sed -i "s<pathvariable<$PATH<g" start.sh
-
-  # Download stop.sh from repository
-  echo "Grabbing stop.sh from repository..."
-  curl -H "Accept-Encoding: identity" -L -o stop.sh https://raw.githubusercontent.com/TheRemote/MinecraftBedrockServer/master/stop.sh
-  chmod +x stop.sh
-  sed -i "s:dirname:$DirName:g" stop.sh
-  sed -i "s:servername:$ServerName:g" stop.sh
-  sed -i "s:userxname:$UserName:g" stop.sh
-  sed -i "s<pathvariable<$PATH<g" stop.sh
-
-  # Download restart.sh from repository
-  echo "Grabbing restart.sh from repository..."
-  curl -H "Accept-Encoding: identity" -L -o restart.sh https://raw.githubusercontent.com/TheRemote/MinecraftBedrockServer/master/restart.sh
-  chmod +x restart.sh
-  sed -i "s:dirname:$DirName:g" restart.sh
-  sed -i "s:servername:$ServerName:g" restart.sh
-  sed -i "s:userxname:$UserName:g" restart.sh
-  sed -i "s<pathvariable<$PATH<g" restart.sh
-
-  # Download fixpermissions.sh from repository
-  echo "Grabbing fixpermissions.sh from repository..."
-  curl -H "Accept-Encoding: identity" -L -o fixpermissions.sh https://raw.githubusercontent.com/TheRemote/MinecraftBedrockServer/master/fixpermissions.sh
-  chmod +x fixpermissions.sh
-  sed -i "s:dirname:$DirName:g" fixpermissions.sh
-  sed -i "s:servername:$ServerName:g" fixpermissions.sh
-  sed -i "s:userxname:$UserName:g" fixpermissions.sh
-  sed -i "s<pathvariable<$PATH<g" fixpermissions.sh
-
-  # Download update.sh from repository
-  echo "Grabbing update.sh from repository..."
-  curl -H "Accept-Encoding: identity" -L -o update.sh https://raw.githubusercontent.com/TheRemote/MinecraftBedrockServer/master/update.sh
-  chmod +x update.sh
-}
-
 Update_Service() {
   # Update minecraft server service
   echo "Configuring Minecraft $ServerName service..."
@@ -233,19 +187,6 @@ Update_Sudoers() {
 }
 
 ################################################################################################# End Functions
-
-# Check to make sure we aren't running as root
-if [[ $(id -u) = 0 ]]; then
-   echo "This script is not meant to be run as root. Please run ./SetupMinecraft.sh as a non-root user, without sudo; the script will call sudo when it is needed. Exiting..."
-   exit 1
-fi
-
-if [ -e "SetupMinecraft.sh" ]; then
-  rm -f "SetupMinecraft.sh"
-  echo "Local copy of SetupMinecraft.sh running.  Exiting and running online version..."
-  curl https://raw.githubusercontent.com/TheRemote/MinecraftBedrockServer/master/SetupMinecraft.sh | bash
-  exit 1
-fi
 
 Check_Dependencies
 
