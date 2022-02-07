@@ -2,15 +2,6 @@
 # Author: James Chambers - https://jamesachambers.com/minecraft-bedrock-edition-ubuntu-dedicated-server-guide/
 # Minecraft Bedrock server startup script using screen
 
-# Set path variable
-USERPATH="pathvariable"
-PathLength=${#USERPATH}
-if [[ "$PathLength" -gt 12 ]]; then
-    PATH="$USERPATH"
-else
-    echo "Unable to set path variable.  You likely need to download an updated version of SetupMinecraft.sh from GitHub!"
-fi
-
 # Randomizer for user agent
 RandNum=$(echo $((1 + $RANDOM % 5000)))
 
