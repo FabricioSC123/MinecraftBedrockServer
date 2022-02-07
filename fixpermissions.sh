@@ -6,15 +6,6 @@
 
 # If you are using the systemd service (sudo systemctl start servername) it performs this automatically for you each startup
 
-# Set path variable
-USERPATH="pathvariable"
-PathLength=${#USERPATH}
-if [[ "$PathLength" -gt 12 ]]; then
-    PATH="$USERPATH"
-else
-    echo "Unable to set path variable.  You likely need to download an updated version of SetupMinecraft.sh from GitHub!"
-fi
-
 # Get an optional custom countdown time (in minutes)
 Automated=0
 while getopts ":a:" opt; do
